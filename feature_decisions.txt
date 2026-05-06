@@ -1,0 +1,34 @@
+======================================================================
+FILE CONTRIBUTIONS TO MODEL
+======================================================================
+
+MRegularSeasonDetailedResults.csv — PRIMARY FEATURE SOURCE
+Provides game-by-game box scores for every regular season game since
+2003. Each team appears in both winning (W) and losing (L) columns
+depending on game outcome. Features are built by aggregating both
+sides into per-team season averages before the tournament starts.
+
+MNCAATourneySeeds.csv — SEED FEATURE
+Provides each team's tournament seed per season. Seed is stored as
+a string with a region letter prefix (e.g. W01) that gets stripped
+to extract the numeric seed (1-16) as a model feature.
+
+MSeasons.csv — SEASON REFERENCE
+Maps seasons to calendar years and converts DayNum values to real
+dates. Used to correctly filter train (2003-2023), validation (2024),
+and test (2025-2026) splits.
+
+MMasseyOrdinals.csv — EXTERNAL RANKINGS
+Third party mathematical ratings. One team appears multiple times per
+season, once per ranking system. Pivoted to one row per team per
+season with columns for selected systems: POM, SAG, MOR, DUN.
+
+MNCAATourneyCompactResults.csv — TARGET VARIABLE
+Records every tournament game outcome. Winning team receives label 1,
+losing team receives label 0. Also used to engineer time series
+features: deepest round reached per year, rolling 3-year average,
+and tournament appearances in last 5 years.
+
+MTeams.csv — LOOKUP TABLE
+Translates numeric TeamIDs to team names. Used for readability when
+joining files and interpreting results. Not a model feature.
