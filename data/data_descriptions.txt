@@ -1,0 +1,53 @@
+NCAA BRACKET MODEL — DATA DICTIONARY
+=====================================
+
+FILE: MTeams.csv
+PURPOSE: Master lookup table that maps numeric TeamIDs to team names.
+COLUMNS: TeamID, TeamName, FirstD1Season, LastD1Season
+NOTES: TeamID never changes from year to year. Used to translate IDs to
+       readable team names when joining with other files.
+
+----------------------------------------------------------------------
+
+FILE: MSeasons.csv
+PURPOSE: Maps each season to its calendar year and date information.
+COLUMNS: Season, DayZero, RegionW, RegionX, RegionY, RegionZ
+NOTES: Season refers to the year the tournament was played in, not the
+       year the season started. DayZero is used to convert DayNum values
+       into real calendar dates.
+
+----------------------------------------------------------------------
+
+FILE: MNCAATourneySeeds.csv
+PURPOSE: Records the seed assigned to every team in every tournament.
+COLUMNS: Season, Seed, TeamID
+NOTES: Between 64 to 68 rows per year depending on play-in games. Seed
+       format is a region letter (W/X/Y/Z) followed by a two-digit seed
+       number (01-16). Seed is the most predictive single feature in the
+       model.
+
+----------------------------------------------------------------------
+
+FILE: MNCAATourneyCompactResults.csv
+PURPOSE: Records the outcome of every NCAA tournament game.
+COLUMNS: Season, DayNum, WTeamID, WScore, LTeamID, LScore, WLoc, NumOT
+NOTES: This is the target variable. W and L prefixes refer to winning
+       and losing, not women's. All men's tournament games are played
+       at neutral sites so WLoc is always N.
+
+----------------------------------------------------------------------
+
+FILE: MRegularSeasonDetailedResults.csv
+PURPOSE: Full box score stats for every regular season game since 2003.
+COLUMNS: Season, DayNum, WTeamID, WScore, LTeamID, LScore, WLoc, NumOT,
+         plus per-team stats: FGM, FGA, FGM3, FGA3, FTM, FTA, OR, DR,
+         Ast, TO, Stl, Blk, PF for both winning and losing teams.
+NOTES: Primary feature source. Used to build per-team season averages
+       that represent team strength before the tournament starts.
+
+----------------------------------------------------------------------
+
+FILE: MMasseyOrdinals.csv
+PURPOSE: Weekly rankings from dozens of external systems including
+         KenPom, Sagarin, and RPI going back to 2003.
+COLUMNS: Season, RankingDayNum, SystemName, Tea
