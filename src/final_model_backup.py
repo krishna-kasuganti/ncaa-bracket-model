@@ -8,7 +8,7 @@ final_brier_score = brier_score_loss(y_test, final_model.predict_proba(X_test)[:
 
 final_accuracy, final_logloss, final_brier_score
 ## Interpreting Results
-teams = pd.read_csv("../data/raw/Mteams.csv")
+teams = pd.read_csv("../data/raw/MTeams.csv")
 teams.head()
 final_features = pd.read_parquet("../data/processed/final_features.parquet")
 
